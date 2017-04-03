@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "fogefoge.h"
 #include "mapa.h"
 
@@ -9,6 +10,15 @@ POSICAO heroi;
 
 int acabou() {
     return 0;
+}
+
+int ehdirecao(char direcao) {
+	// Só aceita estas teclas.
+    return
+        direcao == ESQUERDA || 
+        direcao == CIMA ||
+        direcao == BAIXO ||
+        direcao == DIREITA;
 }
 
 void move(char direcao) {
@@ -35,13 +45,9 @@ void move(char direcao) {
             break;
     }
 	    
-    // Verifica se vai sair da matriz e nao deixa.
-    if (!ehvalida(&m, proximox, proximoy))
-    	return;
-
-	// Verifica se a proxima posicao é vazia.
-	if (!ehvazia(&m, proximox, proximoy))
-    	return; 
+    
+    if (!podeandar(&m, proximox, proximoy))
+		return;
     	
     // Aplica o movimento.
     andanomapa(&m, heroi.x, heroi.y, proximox, proximoy);
@@ -49,13 +55,27 @@ void move(char direcao) {
 	heroi.y = proximoy;
 }
 
-int ehdirecao(char direcao) {
-	// Só aceita estas teclas.
-    return
-        direcao == ESQUERDA || 
-        direcao == CIMA ||
-        direcao == BAIXO ||
-        direcao == DIREITA;
+int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino) {
+    int opcoes[4][2] = {
+        { xatual   , yatual+1 },
+        { xatual+1 , yatual   },
+        { xatual   , yatual-1 },
+        { xatual-1 , yatual   }
+    };
+    
+    srand(time(0));
+    int i;
+    for(i = 0; i < 10; i++) {
+        int posicao = rand() % 4;
+        
+        if (podeandar(&m, opcoes[posicao][0], opcoes[posicao][1])) {
+            *xdestino = opcoes[posicao][0];
+            *ydestino = opcoes[posicao][1];
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 void fantasmas() {
@@ -67,9 +87,14 @@ void fantasmas() {
     for(i = 0; i < copia.linhas; i++) {
         for(j = 0; j < copia.colunas; j++) {
             if (copia.matriz[i][j] == FANTASMA) {
-                if (podeandar(&m, i, j+1)) {
-				    andanomapa(&m, i, j, i, j+1);
-				}
+            	int xdestino;
+                int ydestino;
+
+                int encontrou = praondefantasmavai(i, j, &xdestino, &ydestino);
+
+                if (encontrou) {
+                    andanomapa(&m, i, j, xdestino, ydestino);
+                }
             }
         }
     }
@@ -89,6 +114,7 @@ int main() {
         scanf(" %c", &comando);
         
         move(comando);
+        
         fantasmas();
     } while (!acabou());
 	

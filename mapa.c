@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "mapa.h"
 
 void lemapa(MAPA* m) {
@@ -78,6 +79,7 @@ int ehvalida(MAPA* m, int x, int y) {
 }
 
 int ehvazia(MAPA* m, int x, int y) {
+	// Verifica se a proxima posicao é vazia.
     return m->matriz[x][y] == VAZIO;
 }
 
