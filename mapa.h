@@ -10,7 +10,7 @@ struct posicao {
     int y;
 };
 
-// Da um novo nome ao tipo, não sendo necessario usar "struct mapa m;".
+// Da um apelido para o tipo, não sendo necessario usar "struct mapa" e sim "MAPA".
 typedef struct mapa MAPA;
 
 typedef struct posicao POSICAO;
