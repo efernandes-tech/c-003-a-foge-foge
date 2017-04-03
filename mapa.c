@@ -39,6 +39,16 @@ void alocamapa(MAPA* m) {
 	}
 }
 
+void copiamapa(MAPA* destino, MAPA* origem) {
+    destino->linhas = origem->linhas;
+    destino->colunas = origem->colunas;
+    alocamapa(destino);
+    int i;
+    for(i = 0; i < origem->linhas; i++) {
+        strcpy(destino->matriz[i], origem->matriz[i]);
+    }
+}
+
 void liberamapa(MAPA* m) {
 	int i;
     for(i = 0; i < m->linhas; i++) {
@@ -55,17 +65,26 @@ void imprimemapa(MAPA* m) {
     }
 }
 
-void encontramapa(MAPA* m, POSICAO* p, char c) {
+int encontramapa(MAPA* m, POSICAO* p, char c) {
 	int i, j;
     for(i = 0; i < m->linhas; i++) {
         for(j = 0; j < m->colunas; j++) {
             if (m->matriz[i][j] == c) {
                 p->x = i;
                 p->y = j;
-                return;
+                return 1;
             }
         }
     }
+    // Não encontrado.
+    return 0;
+}
+
+int podeandar(MAPA* m, char personagem, int x, int y) {
+    return 
+        ehvalida(m, x, y) && 
+        !ehparede(m, x, y) &&
+        !ehpersonagem(m, personagem, x, y);
 }
 
 int ehvalida(MAPA* m, int x, int y) {
@@ -78,9 +97,15 @@ int ehvalida(MAPA* m, int x, int y) {
     return 1;    
 }
 
-int ehvazia(MAPA* m, int x, int y) {
-	// Verifica se a proxima posicao é vazia.
-    return m->matriz[x][y] == VAZIO;
+int ehpersonagem(MAPA* m, char personagem, int x, int y) {
+    return
+        m->matriz[x][y] == personagem;
+}
+
+int ehparede(MAPA* m, int x, int y) {
+    return 
+        m->matriz[x][y] == PAREDE_VERTICAL ||
+        m->matriz[x][y] == PAREDE_HORIZONTAL;
 }
 
 void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino) {
@@ -89,18 +114,6 @@ void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino) {
     m->matriz[xorigem][yorigem] = VAZIO;
 }
 
-void copiamapa(MAPA* destino, MAPA* origem) {
-    destino->linhas = origem->linhas;
-    destino->colunas = origem->colunas;
-    alocamapa(destino);
-    int i;
-    for(i = 0; i < origem->linhas; i++) {
-        strcpy(destino->matriz[i], origem->matriz[i]);
-    }
-}
 
-int podeandar(MAPA* m, int x, int y) {
-    return 
-        ehvalida(m, x, y) && 
-        ehvazia(m, x, y);
-}
+
+

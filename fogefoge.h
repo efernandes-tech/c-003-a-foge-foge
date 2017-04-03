@@ -5,7 +5,7 @@
 #define ESQUERDA 'a'
 
 int acabou();
-int ehdirecao(char direcao);
 void move(char direcao);
 int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino);
+int ehdirecao(char direcao);
 void fantasmas();

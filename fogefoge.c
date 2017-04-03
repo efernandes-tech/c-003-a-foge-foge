@@ -9,7 +9,12 @@ MAPA m;
 POSICAO heroi;
 
 int acabou() {
-    return 0;
+    POSICAO pos;
+
+    int perdeu = !encontramapa(&m, &pos, HEROI);
+    int ganhou = !encontramapa(&m, &pos, FANTASMA);
+
+    return ganhou || perdeu;
 }
 
 int ehdirecao(char direcao) {
@@ -46,8 +51,8 @@ void move(char direcao) {
     }
 	    
     
-    if (!podeandar(&m, proximox, proximoy))
-		return;
+    if (!podeandar(&m, HEROI, proximox, proximoy))
+        return;
     	
     // Aplica o movimento.
     andanomapa(&m, heroi.x, heroi.y, proximox, proximoy);
@@ -68,7 +73,7 @@ int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino) {
     for(i = 0; i < 10; i++) {
         int posicao = rand() % 4;
         
-        if (podeandar(&m, opcoes[posicao][0], opcoes[posicao][1])) {
+        if (podeandar(&m, FANTASMA, opcoes[posicao][0], opcoes[posicao][1])) {
             *xdestino = opcoes[posicao][0];
             *ydestino = opcoes[posicao][1];
             return 1;
