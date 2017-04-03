@@ -1,61 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fogefoge.h"
+#include "mapa.h"
 
 // struct mapa m;
 MAPA m;
 
-void lemapa() {
-    FILE* f;
-    f = fopen("mapa.txt", "r");
-    if (f == 0) {
-        printf("Erro na leitura do mapa.");
-        exit(1);
-    }
-
-    fscanf(f, "%d %d", &(m.linhas), &(m.colunas));
-    alocamapa();
-
-	int i;
-    for(i = 0; i < m.linhas; i++) {
-        fscanf(f, "%s", m.matriz[i]);
-    }
-
-    fclose(f);
-}
-
-void alocamapa() {
-	// O "malloc()" aloca uma quantidade de bytes e devolve um ponteiro.
-	// O "sizeof()" retorna a qtd de bytes para o tipo char nessa maquina.
-	// O "m.matriz" é um ponteiro de ponteiros, e esta alocando o tamanha de um
-	// ponteiro de char "sizeof(char*)".
-	m.matriz = malloc(sizeof(char*) * m.linhas);
-
-	int i;
-	for(i = 0; i < m.linhas; i++) {
-		// Cada ponteiro esta alocando o tamanha de um char "sizeof(char)".
-		m.matriz[i] = malloc(sizeof(char) * m.colunas + 1);
-	}
-}
-
-void liberamapa() {
-	int i;
-    for(i = 0; i < m.linhas; i++) {
-        free(m.matriz[i]);
-    }
-    // Cada "malloc()" deve ter um free, se não ninguem + usa o espaço alocado.
-    free(m.matriz);
-}
-
 int acabou() {
     return 0;
-}
-
-void imprimemapa() {
-	int i;
-    for(i = 0; i < m.linhas; i++) {
-        printf("%s\n", m.matriz[i]);
-    }
 }
 
 void move(char direcao) {
@@ -95,10 +47,10 @@ void move(char direcao) {
 }
 
 int main() {
-	lemapa();
+	lemapa(&m);
 	
 	do {
-        imprimemapa();
+        imprimemapa(&m);
 
         char comando;
         scanf(" %c", &comando);
@@ -106,5 +58,5 @@ int main() {
         move(comando);
     } while (!acabou());
 	
-	liberamapa();
+	liberamapa(&m);
 }
