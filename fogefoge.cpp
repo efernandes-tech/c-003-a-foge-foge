@@ -11,4 +11,15 @@ int main() {
 	    printf("Erro na leitura do mapa.");
 	    exit(1);
 	}
+	
+	int i;
+	for(i = 0; i < 5; i++) {
+	    fscanf(f, "%s", mapa[i]);
+	}
+	
+	for(i = 0; i < 5; i++) {
+	    printf("%s\n", mapa[i]);
+	}
+	
+	fclose(f);
 }
