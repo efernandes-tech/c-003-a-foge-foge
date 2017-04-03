@@ -1,1 +1,2 @@
 1 - Tmb é possivel criar ponteiros para funções (joga no google).
+2 - "Struct" é uma maneira de agrupar variaveis (ex.: sempre serão usadas juntas).
