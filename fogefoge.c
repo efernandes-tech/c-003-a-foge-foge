@@ -21,16 +21,16 @@ void move(char direcao) {
 
 	// Determina o movimento do pj.
     switch(direcao) {
-        case 'a':
+        case ESQUERDA:
             proximoy--;
             break;
-        case 'w':
+        case CIMA:
             proximox--;
             break;
-        case 's':
+        case BAIXO:
             proximox++;
             break;
-        case 'd':
+        case DIREITA:
             proximoy++;
             break;
     }
@@ -52,16 +52,16 @@ void move(char direcao) {
 int ehdirecao(char direcao) {
 	// Só aceita estas teclas.
     return
-        direcao == 'a' || 
-        direcao == 'w' ||
-        direcao == 's' ||
-        direcao == 'd';
+        direcao == ESQUERDA || 
+        direcao == CIMA ||
+        direcao == BAIXO ||
+        direcao == DIREITA;
 }
 
 int main() {
 	lemapa(&m);
 	
-	encontramapa(&m, &heroi, '@');
+	encontramapa(&m, &heroi, HEROI);
 	
 	do {
         imprimemapa(&m);

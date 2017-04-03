@@ -1,3 +1,9 @@
+// Constantes.
+#define HEROI '@'
+#define VAZIO '.'
+#define PAREDE_VERTICAL '|'
+#define PAREDE_HORIZONTAL '-'
+
 // Declaracao de uma struct para agrupar variaveis que sempre estao juntas.
 struct mapa {
 	char** matriz;

@@ -78,11 +78,11 @@ int ehvalida(MAPA* m, int x, int y) {
 }
 
 int ehvazia(MAPA* m, int x, int y) {
-    return m->matriz[x][y] == '.';
+    return m->matriz[x][y] == VAZIO;
 }
 
 void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino) {
     char personagem = m->matriz[xorigem][yorigem];
     m->matriz[xdestino][ydestino] = personagem;
-    m->matriz[xorigem][yorigem] = '.';
+    m->matriz[xorigem][yorigem] = VAZIO;
 } 
