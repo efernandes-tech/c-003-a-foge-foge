@@ -1,0 +1,1 @@
+1 - Tmb é possivel criar ponteiros para funções (joga no google).
