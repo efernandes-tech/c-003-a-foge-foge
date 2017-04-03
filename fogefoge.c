@@ -49,13 +49,64 @@ void liberamapa() {
     free(mapa);
 }
 
+int acabou() {
+    return 0;
+}
+
+void imprimemapa() {
+	int i;
+    for(i = 0; i < linhas; i++) {
+        printf("%s\n", mapa[i]);
+    }
+}
+
+void move(char direcao) {
+    int x;
+    int y;
+    int i, j;
+    
+    // Determina a posicao atual do pj.
+    for(i = 0; i < linhas; i++) {
+        for(j = 0; j < colunas; j++) {
+            if (mapa[i][j] == '@') {
+                x = i;
+                y = j;
+                break;
+            }
+        }
+    }
+    
+    // Determina o movimento do pj.
+    switch(direcao) {
+        case 'a': // esq
+            mapa[x][y-1] = '@';
+            break;
+        case 'w': // cima
+            mapa[x-1][y] = '@';
+            break;
+        case 's': // baixo
+            mapa[x+1][y] = '@';
+            break;
+        case 'd': // dir
+            mapa[x][y+1] = '@';
+            break;
+    }
+
+	// Onde ele estava fica vazio.
+    mapa[x][y] = '.';
+}
+
 int main() {
 	lemapa();
 	
-	int i;
-	for(i = 0; i < 5; i++) {
-	    printf("%s\n", mapa[i]);
-	}
+	do {
+        imprimemapa();
+
+        char comando;
+        scanf(" %c", &comando);
+        move(comando);
+
+    } while (!acabou());
 	
 	liberamapa();
 }
