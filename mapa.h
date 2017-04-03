@@ -3,6 +3,7 @@
 #define VAZIO '.'
 #define PAREDE_VERTICAL '|'
 #define PAREDE_HORIZONTAL '-'
+#define FANTASMA 'F'
 
 // Declaracao de uma struct para agrupar variaveis que sempre estao juntas.
 struct mapa {
@@ -29,5 +30,6 @@ void imprimemapa(MAPA* m);
 int ehvalida(MAPA* m, int x, int y);
 int ehvazia(MAPA* m, int x, int y);
 void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino);
+void copiamapa(MAPA* destino, MAPA* origem);
 
 void encontramapa(MAPA* m, POSICAO* p, char c);

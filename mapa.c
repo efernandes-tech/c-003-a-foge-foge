@@ -85,4 +85,14 @@ void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino) {
     char personagem = m->matriz[xorigem][yorigem];
     m->matriz[xdestino][ydestino] = personagem;
     m->matriz[xorigem][yorigem] = VAZIO;
-} 
+}
+
+void copiamapa(MAPA* destino, MAPA* origem) {
+    destino->linhas = origem->linhas;
+    destino->colunas = origem->colunas;
+    alocamapa(destino);
+    int i;
+    for(i = 0; i < origem->linhas; i++) {
+        strcpy(destino->matriz[i], origem->matriz[i]);
+    }
+}
