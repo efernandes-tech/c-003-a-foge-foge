@@ -5,49 +5,39 @@
 
 // struct mapa m;
 MAPA m;
+POSICAO heroi;
 
 int acabou() {
     return 0;
 }
 
 void move(char direcao) {
-    int x;
-    int y;
-    int i, j;
-    
-    // Determina a posicao atual do pj.
-    for(i = 0; i < m.linhas; i++) {
-        for(j = 0; j < m.colunas; j++) {
-            if (m.matriz[i][j] == '@') {
-                x = i;
-                y = j;
-                break;
-            }
-        }
-    }
-    
+	m.matriz[heroi.x][heroi.y] = '.';
     // Determina o movimento do pj.
     switch(direcao) {
         case 'a': // esq
-            m.matriz[x][y-1] = '@';
+            m.matriz[heroi.x][heroi.y-1] = '@';
+            heroi.y--;
             break;
         case 'w': // cima
-            m.matriz[x-1][y] = '@';
+            m.matriz[heroi.x-1][heroi.y] = '@';
+            heroi.x--;
             break;
         case 's': // baixo
-            m.matriz[x+1][y] = '@';
+            m.matriz[heroi.x+1][heroi.y] = '@';
+            heroi.x++;
             break;
         case 'd': // dir
-            m.matriz[x][y+1] = '@';
+            m.matriz[heroi.x][heroi.y+1] = '@';
+            heroi.y++;
             break;
     }
-
-	// Onde ele estava fica vazio.
-    m.matriz[x][y] = '.';
 }
 
 int main() {
 	lemapa(&m);
+	
+	encontramapa(&m, &heroi, '@');
 	
 	do {
         imprimemapa(&m);
