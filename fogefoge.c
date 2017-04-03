@@ -67,9 +67,9 @@ void fantasmas() {
     for(i = 0; i < copia.linhas; i++) {
         for(j = 0; j < copia.colunas; j++) {
             if (copia.matriz[i][j] == FANTASMA) {
-                if (ehvalida(&m, i, j+1) && ehvazia(&m, i, j+1)) {
-                    andanomapa(&m, i, j, i, j+1);
-                }
+                if (podeandar(&m, i, j+1)) {
+				    andanomapa(&m, i, j, i, j+1);
+				}
             }
         }
     }

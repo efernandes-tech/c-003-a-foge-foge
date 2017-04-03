@@ -96,3 +96,9 @@ void copiamapa(MAPA* destino, MAPA* origem) {
         strcpy(destino->matriz[i], origem->matriz[i]);
     }
 }
+
+int podeandar(MAPA* m, int x, int y) {
+    return 
+        ehvalida(m, x, y) && 
+        ehvazia(m, x, y);
+}
