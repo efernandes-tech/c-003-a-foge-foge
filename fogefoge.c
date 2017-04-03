@@ -29,11 +29,11 @@ void lemapa() {
 void alocamapa() {
 	// O "malloc()" aloca uma quantidade de bytes e devolve um ponteiro.
 	// O "sizeof()" retorna a qtd de bytes para o tipo char nessa maquina.
-	mapa = malloc(sizeof(char*) * linhas);
+	mapa = malloc(sizeof(char*) * colunas);
 
 	int i;
 	for(i = 0; i < linhas; i++) {
-		//mapa[i] = malloc(sizeof(char) * colunas + 1);
+		mapa[i] = malloc(sizeof(char) * colunas + 1);
 	}
 }
 
