@@ -11,7 +11,7 @@ void lemapa(MAPA* m) {
     }
 
     fscanf(f, "%d %d", &(m->linhas), &(m->colunas));
-    alocamapa(&m);
+    alocamapa(m);
 
 	int i;
     for(i = 0; i < m->linhas; i++) {
