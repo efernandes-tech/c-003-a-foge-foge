@@ -58,12 +58,31 @@ void encontramapa(MAPA* m, POSICAO* p, char c) {
 	int i, j;
     for(i = 0; i < m->linhas; i++) {
         for(j = 0; j < m->colunas; j++) {
-            if(m->matriz[i][j] == c) {
+            if (m->matriz[i][j] == c) {
                 p->x = i;
                 p->y = j;
                 return;
             }
         }
     }
-
 }
+
+int ehvalida(MAPA* m, int x, int y) {
+	// Verifica se vai sair da matriz e nao deixa.
+    if (x >= m->linhas) 
+        return 0;
+    if (y >= m->colunas) 
+        return 0;
+
+    return 1;    
+}
+
+int ehvazia(MAPA* m, int x, int y) {
+    return m->matriz[x][y] == '.';
+}
+
+void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino) {
+    char personagem = m->matriz[xorigem][yorigem];
+    m->matriz[xdestino][ydestino] = personagem;
+    m->matriz[xorigem][yorigem] = '.';
+} 

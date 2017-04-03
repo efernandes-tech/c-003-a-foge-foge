@@ -12,18 +12,13 @@ int acabou() {
 }
 
 void move(char direcao) {
-	// Só aceita estas teclas.
-	if (
-        direcao != 'a' && 
-        direcao != 'w' &&
-        direcao != 's' &&
-        direcao != 'd'
-    ) return;
-    // O "return" sozinho geralmente é usado para terminar metodos void.
+    // O "return" sozinho geralmente é usado para finalizar metodos void.
+	if (!ehdirecao(direcao))
+        return;
 	
 	int proximox = heroi.x;
     int proximoy = heroi.y;
-       
+
 	// Determina o movimento do pj.
     switch(direcao) {
         case 'a':
@@ -39,22 +34,28 @@ void move(char direcao) {
             proximoy++;
             break;
     }
-    
-    // Verifica se vai sair da matriz e nao deixa.
-    if (proximox >= m.linhas) 
-    	return;
-	if (proximoy >= m.colunas) 
-	    return;
 	    
-	// Verifica se a proxima posicao é vazia.
-	if (m.matriz[proximox][proximoy] != '.') 
+    // Verifica se vai sair da matriz e nao deixa.
+    if (!ehvalida(&m, proximox, proximoy))
     	return;
+
+	// Verifica se a proxima posicao é vazia.
+	if (!ehvazia(&m, proximox, proximoy))
+    	return; 
     	
     // Aplica o movimento.
-    m.matriz[proximox][proximoy] = '@';
-	m.matriz[heroi.x][heroi.y] = '.';
+    andanomapa(&m, heroi.x, heroi.y, proximox, proximoy);
 	heroi.x = proximox;
 	heroi.y = proximoy;
+}
+
+int ehdirecao(char direcao) {
+	// Só aceita estas teclas.
+    return
+        direcao == 'a' || 
+        direcao == 'w' ||
+        direcao == 's' ||
+        direcao == 'd';
 }
 
 int main() {
