@@ -113,14 +113,27 @@ void fantasmas() {
     liberamapa(&copia);
 }
 
-void explodepilula(int x, int y, int qtd) {
+void explodepilula2(int x, int y, int somax, int somay, int qtd) {
     // Se acabou o numero de vezes, entao acaba a função.
     if (qtd == 0) return;
+    
+    int novox = x+somax;
+    int novoy = y+somay;
+    
+    if (!ehvalida(&m, novox, novoy)) return;
+    if (ehparede(&m, novox, novoy)) return;
 
-    m.matriz[x][y+1] = VAZIO;
+    m.matriz[novox][novoy] = VAZIO;
 
     // Dessa vez, passamos qtd-1, pois já rodamos uma vez a função.
-    explodepilula(x, y+1, qtd-1);
+    explodepilula2(novox, novoy, somax, somay, qtd-1);
+}
+
+void explodepilula() {
+    explodepilula2(heroi.x, heroi.y, 0, 1, 3);
+    explodepilula2(heroi.x, heroi.y, 0, -1, 3);
+    explodepilula2(heroi.x, heroi.y, 1, 0, 3);
+    explodepilula2(heroi.x, heroi.y, -1, 0, 3);
 }
 
 int main() {
@@ -136,7 +149,7 @@ int main() {
         scanf(" %c", &comando);
         
         if (ehdirecao(comando)) move(comando);
-    	if (comando == BOMBA) explodepilula(heroi.x, heroi.y, 3);
+    	if (comando == BOMBA) explodepilula();
         
         fantasmas();
     } while (!acabou());
