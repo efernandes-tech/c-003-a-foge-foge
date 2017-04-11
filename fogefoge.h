@@ -10,4 +10,4 @@ void move(char direcao);
 int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino);
 int ehdirecao(char direcao);
 void fantasmas();
-void explodepilula();
+void explodepilula(int x, int y, int qtd);
