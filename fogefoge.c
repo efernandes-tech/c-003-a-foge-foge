@@ -136,7 +136,7 @@ int main() {
         scanf(" %c", &comando);
         
         if (ehdirecao(comando)) move(comando);
-    	if(comando == BOMBA) explodepilula(heroi.x, heroi.y);
+    	if (comando == BOMBA) explodepilula(heroi.x, heroi.y, 3);
         
         fantasmas();
     } while (!acabou());
