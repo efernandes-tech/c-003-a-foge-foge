@@ -3,8 +3,8 @@
 #include <time.h>
 #include "fogefoge.h"
 #include "mapa.h"
+#include "ui.h"
 
-// struct mapa m;
 MAPA m;
 POSICAO heroi;
 
@@ -28,11 +28,7 @@ int ehdirecao(char direcao) {
         direcao == DIREITA;
 }
 
-void move(char direcao) {
-    // O "return" sozinho geralmente é usado para finalizar metodos void.
-	if (!ehdirecao(direcao))
-        return;
-	
+void move(char direcao) {	
 	int proximox = heroi.x;
     int proximoy = heroi.y;
 
@@ -52,7 +48,7 @@ void move(char direcao) {
             break;
     }
 	    
-    
+    // O "return" sozinho geralmente é usado para finalizar metodos void.
     if (!podeandar(&m, HEROI, proximox, proximoy))
         return;
         
@@ -157,6 +153,6 @@ int main() {
         
         fantasmas();
     } while (!acabou());
-	
+
 	liberamapa(&m);
 }

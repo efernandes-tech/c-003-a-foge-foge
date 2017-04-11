@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "mapa.h"
+#include <string.h>
 
 void lemapa(MAPA* m) {
     FILE* f;
@@ -42,7 +42,9 @@ void alocamapa(MAPA* m) {
 void copiamapa(MAPA* destino, MAPA* origem) {
     destino->linhas = origem->linhas;
     destino->colunas = origem->colunas;
+    
     alocamapa(destino);
+    
     int i;
     for(i = 0; i < origem->linhas; i++) {
         strcpy(destino->matriz[i], origem->matriz[i]);
@@ -56,13 +58,6 @@ void liberamapa(MAPA* m) {
     }
     // Cada "malloc()" deve ter um free, se não ninguem + usa o espaço alocado.
     free(m->matriz);
-}
-
-void imprimemapa(MAPA* m) {
-	int i;
-    for(i = 0; i < m->linhas; i++) {
-        printf("%s\n", m->matriz[i]);
-    }
 }
 
 int encontramapa(MAPA* m, POSICAO* p, char c) {
@@ -113,7 +108,3 @@ void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino) {
     m->matriz[xdestino][ydestino] = personagem;
     m->matriz[xorigem][yorigem] = VAZIO;
 }
-
-
-
-
