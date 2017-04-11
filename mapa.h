@@ -4,6 +4,7 @@
 #define PAREDE_VERTICAL '|'
 #define PAREDE_HORIZONTAL '-'
 #define FANTASMA 'F'
+#define PILULA 'p'
 
 // Declaracao de uma struct para agrupar variaveis que sempre estao juntas.
 struct mapa {
