@@ -1,2 +1,3 @@
 # c-003-a-foge-foge
-Jogo em C. (projeto prático)
+
+Jogo em C.
